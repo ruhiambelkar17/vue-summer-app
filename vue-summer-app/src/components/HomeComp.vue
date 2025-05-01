@@ -47,13 +47,26 @@
                     </tr>
                     </tbody>
                 </table>
+                {{ $store.state.apiResp }}
             </div>
         </div>
     </div>
 </template>
 
 <script>
+
 export default {
+    data(){
+        return {
+            apiArtData:[],
+           
+        }
+    },
+    async created(){
+        await this.$store.dispatch("getArtActivities");
+        console.log("resp",this.$store.state.apiResp)
+       
+    }
     
 }
 </script>
