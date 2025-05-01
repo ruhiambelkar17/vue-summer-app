@@ -6,9 +6,9 @@ export default createStore({
         apiResp:[]
     },
     mutations:{
-        getArtData(state){
-            return state.apiResp; 
-        }
+        // getArtData(state){
+        //     return state.apiResp; 
+        // }
     },
     actions:{
         async getArtActivities(){

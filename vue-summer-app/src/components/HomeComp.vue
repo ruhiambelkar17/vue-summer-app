@@ -29,25 +29,25 @@
         <!--Table-->
         <div class="row pt-5 mx-4"> 
             <div class="col-md-12 border rounded shadow"> 
-                <table class="table">
-                    <thead>
-                        <tr>
-                        <th>SR No</th>
-                        <th>Name</th>
-                        <th>Total Seats</th>
-                        <th>Available Seats</th>
+                <table class="table" >
+                    <thead >
+                        <tr >
+                        <th>Sr No</th>
+                        <th v-for="(item,index) in artHeadings" :key="index">{{ item}}</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>1</td>
-                        <td>Manadal Pen art</td>
-                        <td>40</td>
-                        <td>10</td>
+                        <tr v-for="(item,index) in apiArtData" :key="index">
+                            <td>{{ item.id }}</td>
+                        <td>{{ item.attributes.artActivityName }}</td>
+                        <td>{{ item.attributes.totalSeats }}</td>
+                        <td>{{ item.attributes.availableSeats }}</td>
+                        
                     </tr>
                     </tbody>
                 </table>
-                {{ $store.state.apiResp }}
+                {{ apiArtData }}
             </div>
         </div>
     </div>
@@ -59,13 +59,22 @@ export default {
     data(){
         return {
             apiArtData:[],
+            artHeadings:[]
            
         }
     },
     async created(){
         await this.$store.dispatch("getArtActivities");
-        console.log("resp",this.$store.state.apiResp)
+        this.apiArtData=this.$store.state.apiResp;
+        this.getHeadings();
        
+    },
+    methods:{
+        getHeadings(){
+            for(let i=0;i<this.apiArtData.length-1;i++){
+                this.artHeadings=(Object.keys(this.apiArtData[i].attributes))
+            }
+        }
     }
     
 }
