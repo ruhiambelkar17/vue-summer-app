@@ -52,16 +52,22 @@
                 <button @click="PostData">Post New data</button>
             </div>
         </div>
+        <ChildCompforHome :propName="propName" @EventName="getEmmittedData"></ChildCompforHome>
+        <p>Emitted data from child:{{ emittedData }}</p>
     </div>
 </template>
 
 <script>
+import ChildCompforHome from './ChildCompforHome.vue';
 
 export default {
+    components:{ChildCompforHome},
     data(){
         return {
             apiArtData:[],
-            artHeadings:[]
+            artHeadings:[],
+            propName:"hello",
+            emittedData:''
            
         }
     },
@@ -88,6 +94,9 @@ export default {
         },
         PostData(){
             this.$store.dispatch('postNewData');
+        },
+        getEmmittedData(data){
+            this.emittedData=data;
         }
     }
     
