@@ -44,6 +44,7 @@
                         <td>{{ item.totalSeats }}</td>
                         <td>{{ item.availableSeats }}</td>
                         <td><button class="btn btn-light" @click="deleteRecord(item.id)">Delete</button></td>
+                        <td><button class="btn btn-light" @click="updateRecord(item.id)">Update</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -80,6 +81,9 @@ export default {
         },
         deleteRecord(id){
             this.$store.dispatch('deleteArtActivity',id);
+        },
+        updateRecord(id){
+            this.$store.dispatch('updateArtActivity',id);
         }
     }
     

@@ -24,6 +24,15 @@ export default createStore({
             await axios.delete(`http://localhost:1337/api/art-activities/${id}`);
             commit('getDeleteId',id);
             console.log("api resp delete",this.state.apiResp)
+        },
+        async updateArtActivity({commit},id){
+            await axios.put(`http://localhost:1337/api/art-activities/${id}`,{
+                data:{
+                    availableSeats:5
+                }
+            });
+            commit('getDeleteId',id);
+            console.log("api resp delete",this.state.apiResp)
         }
     },
     getters:{
