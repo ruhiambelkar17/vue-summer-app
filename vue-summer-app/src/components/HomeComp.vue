@@ -40,15 +40,16 @@
                     <tbody>
                         <tr v-for="(item,index) in apiArtData" :key="index">
                             <td>{{ index }}</td>
-                        <td>{{ item.activityName }}</td>
-                        <td>{{ item.totalSeats }}</td>
-                        <td>{{ item.availableSeats }}</td>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.data }}</td>
                         <td><button class="btn btn-light" @click="deleteRecord(item.id)">Delete</button></td>
                         <td><button class="btn btn-light" @click="updateRecord(item.id)">Update</button></td>
                     </tr>
                     </tbody>
                 </table>
                 {{ apiArtData }}
+                <button @click="PostData">Post New data</button>
             </div>
         </div>
     </div>
@@ -77,13 +78,16 @@ export default {
                 this.artHeadings=(Object.keys(this.apiArtData[i]))
                 
             }
-            this.artHeadings=this.artHeadings.splice(2,3);
+            //this.artHeadings=this.artHeadings.splice(2,3);
         },
         deleteRecord(id){
             this.$store.dispatch('deleteArtActivity',id);
         },
         updateRecord(id){
             this.$store.dispatch('updateArtActivity',id);
+        },
+        PostData(){
+            this.$store.dispatch('postNewData');
         }
     }
     

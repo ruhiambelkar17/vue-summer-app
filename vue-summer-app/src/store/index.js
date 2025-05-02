@@ -13,16 +13,16 @@ export default createStore({
     },
     actions:{
         async getArtActivities(){
-            this.state.apiResp=(await axios.get('http://localhost:1337/api/art-activities')).data.data;
+            this.state.apiResp=(await axios.get('https://api.restful-api.dev/objects')).data;
             //await axios.get('http://localhost:1337/api/art-activities').then(response => commit('getArtData',response.data.data))
             console.log("api resp",this.state.apiResp)
             
         },
         async deleteArtActivity({commit},id){
             console.log('id',id);
-            
-            await axios.delete(`http://localhost:1337/api/art-activities/${id}`);
             commit('getDeleteId',id);
+            await axios.delete(`https://api.restful-api.dev/objects/${id}`);
+           
             console.log("api resp delete",this.state.apiResp)
         },
         async updateArtActivity({commit},id){
@@ -33,6 +33,18 @@ export default createStore({
             });
             commit('getDeleteId',id);
             console.log("api resp delete",this.state.apiResp)
+        },
+        async postNewData(){
+            await axios.post(`https://api.restful-api.dev/objects`,{
+                
+                    id: "14",
+      name: "Google Pixel 7 Pro",
+      data: {
+         color: "Cloudy White",
+         capacity: "128 GB"
+}
+                
+            });
         }
     },
     getters:{
