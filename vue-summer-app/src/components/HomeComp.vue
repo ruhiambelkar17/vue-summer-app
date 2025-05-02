@@ -39,11 +39,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="(item,index) in apiArtData" :key="index">
-                            <td>{{ item.id }}</td>
-                        <td>{{ item.attributes.artActivityName }}</td>
-                        <td>{{ item.attributes.totalSeats }}</td>
-                        <td>{{ item.attributes.availableSeats }}</td>
-                        
+                            <td>{{ index }}</td>
+                        <td>{{ item.activityName }}</td>
+                        <td>{{ item.totalSeats }}</td>
+                        <td>{{ item.availableSeats }}</td>
+                        <td><button class="btn btn-light" @click="deleteRecord(item.id)">Delete</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -67,13 +67,19 @@ export default {
         await this.$store.dispatch("getArtActivities");
         this.apiArtData=this.$store.state.apiResp;
         this.getHeadings();
+        
        
     },
     methods:{
         getHeadings(){
             for(let i=0;i<this.apiArtData.length-1;i++){
-                this.artHeadings=(Object.keys(this.apiArtData[i].attributes))
+                this.artHeadings=(Object.keys(this.apiArtData[i]))
+                
             }
+            this.artHeadings=this.artHeadings.splice(2,3);
+        },
+        deleteRecord(id){
+            this.$store.dispatch('deleteArtActivity',id);
         }
     }
     
