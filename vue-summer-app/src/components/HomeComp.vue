@@ -79,14 +79,23 @@
       @EventName="getEmmittedData"
     ></ChildCompforHome>
     <p>Emitted data from child:{{ emittedData }}</p>
+    <hr />
+    <AsyncComp></AsyncComp>
+    <hr />
+    <component :is="compName"></component>
   </div>
+
 </template>
 
 <script>
 import ChildCompforHome from "./ChildCompforHome.vue";
+import DynamicComp from './DynamicComp.vue'
+import { defineAsyncComponent } from "vue";
 
 export default {
-  components: { ChildCompforHome },
+  components: { ChildCompforHome,DynamicComp,
+    AsyncComp:defineAsyncComponent(()=>import( './AsyncComp.vue'))
+   },
   data() {
     return {
       apiArtData: [],
@@ -94,7 +103,8 @@ export default {
       propName: "hello",
       emittedData: "",
       provideData: "Hello Provide-Inject",
-      filterArray:[]
+      filterArray:[],
+      compName:'DynamicComp'
     };
   },
   provide() {
