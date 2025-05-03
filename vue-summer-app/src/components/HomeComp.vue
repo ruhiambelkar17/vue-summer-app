@@ -83,6 +83,10 @@
     <AsyncComp></AsyncComp>
     <hr />
     <component :is="compName"></component>
+    <hr />
+    <p>mixins:{{ count }}</p>
+    <button class="btn btn-primary" @click="incCount">inc</button>
+
   </div>
 
 </template>
@@ -91,6 +95,7 @@
 import ChildCompforHome from "./ChildCompforHome.vue";
 import DynamicComp from './DynamicComp.vue'
 import { defineAsyncComponent } from "vue";
+import Counter from '../mixins/counter'
 
 export default {
   components: { ChildCompforHome,DynamicComp,
@@ -107,6 +112,7 @@ export default {
       compName:'DynamicComp'
     };
   },
+  mixins:[Counter],
   provide() {
     return {
       providedInfo: this.provideData,
